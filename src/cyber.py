@@ -25,7 +25,7 @@ if(opsi == 1):
         print("=======================================")
         print("Masukkan path file dengan lengkap!")
         print("Contoh:")
-        print("C:\Kuliah\Tingkat 2\Semester 4\Stima\Tucil1_13522054\src\input.txt")
+        print("C:\Kuliah\Tingkat 2\Semester 4\Stima\Tucil1_13522054\test\input.txt")
         print("Path file: ")
         namaFile = str(input())
     print("Membaca file ...")
@@ -90,8 +90,24 @@ else:
     nBuffer = int(input())
     sizeMatrix = str(input())
     sizeMatrix = sizeMatrix.split(" ")
+    xMatrix = int(sizeMatrix[0])
+    yMatrix = int(sizeMatrix[1])
     nSeq = int(input())
     lenSeq = int(input())
+    mainMatrix = []
+    for i in range(yMatrix):
+        temp = []
+        for j in range(xMatrix):
+            temp.append(random.choice(tokens))
+        mainMatrix.append(temp)
+    seqs = []
+    bonus = []
+    for i in range(nSeq):
+        temp = []
+        for j in range(random.randint(2,lenSeq)):
+            temp.append(random.choice(tokens))
+        seqs.append(temp)
+        bonus.append(random.randint(-100,100))
     # print("debug")
     # print(nToken)
     # print(tokens)
@@ -99,7 +115,14 @@ else:
     # print(sizeMatrix)
     # print(nSeq)
     # print(lenSeq)
-
+    print("Matriks: ")
+    for i in range(yMatrix):
+        print(" ".join(mainMatrix[i]))
+    print("Sequences beserta bonusnya:")
+    for i in range(nSeq):
+        print(" ".join(seqs[i]))
+        print(bonus[i])
+    print("")
 
 ### Fungsi-fungsi
 resultPoints = []
@@ -165,18 +188,6 @@ def makeBuffer(digit, lenBuffer, buffer, slot):
                 resultPoints = points
                 resultTokens = tokens
                 resultBonus = tempBonus
-                # resultPoints.append(" ".join(map(str, points)) + "\n")
-                # resultTokens.append(" ".join(map(str, tokens)) + "\n")
-                # fileOut.write(" ".join(map(str, points)) + "\n")
-                # fileOut.write(" ".join(map(str, tokens)) + "\n")
-            # elif(tempBonus == resultBonus and (len(tokens) < len(resultTokens))):
-            #     # resultPoints.append(" ".join(map(str, points)) + "\n")
-            #     # resultTokens.append(" ".join(map(str, tokens)) + "\n")
-            #     resultPoints = points
-            #     resultTokens = tokens
-            #     resultBonus = tempBonus
-                # fileOut.write(" ".join(map(str, points)) + "\n")
-                # fileOut.write(" ".join(map(str, tokens)) + "\n")
     else:
         if (digit == 0):
             for i in range(slot[digit]):
@@ -221,6 +232,20 @@ while(keluar != 'y' and keluar != 'n'):
     keluar = str(input())
 if(keluar == 'y'):
     fileOut = open("hasil.txt", "w")
+    if(opsi == 2):
+        fileOut.write("Matriks: ")
+        fileOut.write("\n")
+        for i in range(yMatrix):
+            fileOut.write(" ".join(mainMatrix[i]))
+            fileOut.write("\n")
+        fileOut.write("Sequences beserta bonusnya:")
+        fileOut.write("\n")
+        for i in range(nSeq):
+            fileOut.write(" ".join(seqs[i]))
+            fileOut.write("\n")
+            fileOut.write(str(bonus[i]))
+            fileOut.write("\n")
+        fileOut.write("\n")
     fileOut.write("Result: ")
     fileOut.write("\n")
     fileOut.write(str(resultBonus))
@@ -236,20 +261,15 @@ if(keluar == 'y'):
     duration = "Time: " + str((end-start) * 10**3) + " ms"
     fileOut.write(duration)   
     fileOut.close()
-
+    print("File disimpan dengan nama hasil.txt")
 ### Exit
 print("Press enter to exit")
 input() #agar program tidak tertutup
 
 # Notes:
-# 1. Belum handle optimasi untuk pembangkit acak SOLVED
-# 2. Belum handle kasus nBuffer < nMaxBuffer (belum optimal) SOLVED
-# 3. Koordinatnya belum benar (perlu ditambah (1, 1)) SOLVED
-# 4. Output ke file belum finish SOLVED
-# 5. Belum handle pembangkit acak
+# 1. Ada beberapa input dari user yang pasti benar
 
-
-# Untuk testcase
+# Untuk testing
 '''
-C:\Kuliah\Tingkat 2\Semester 4\Stima\Tucil1_13522054\src\1.txt
+C:\Kuliah\Tingkat 2\Semester 4\Stima\Tucil1_13522054\test\1.txt
 '''
