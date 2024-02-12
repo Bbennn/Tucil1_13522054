@@ -31,12 +31,23 @@ CARA KOMPILASI (jika perlu, sudah ada file .exe di bin)
 4. File executable akan berada di folder dist
 
 CARA MENJALAN PROGRAM
-1. Buka file executable pada folder bin atau folder hasil kompilasi.
+- Dengan executable file:
+1. Buka executable file pada folder bin atau folder hasil kompilasi.
 2. Pilih metode input.
 3. Jika input menggunakan file (.txt), masukkan nama path file dengan lengkap.
 4. Jika input menggunakan CLI, masukkan data sesuai format yang ada di CLI. 
-5. Pilih apakah solusi ingin disimpan atau tidak.
+5. Pilih apakah solusi ingin disimpan atau tidak. (File hasil disimpan pada directory tempat executable file berada)
 6. Tekan enter untuk keluar.
+- Langsung menggunakan Command Prompt:
+1. Buka Command Prompt
+2. Pindah ke directory tempat cyber.py berada
+3. Masukkan command
+    py cyber.py
+4. Pilih metode input.
+5. Jika input menggunakan file (.txt), masukkan nama path file dengan lengkap.
+6. Jika input menggunakan CLI, masukkan data sesuai format yang ada di CLI. 
+7. Pilih apakah solusi ingin disimpan atau tidak. (File hasil disimpan pada directory tempat cyber.py berada)
+8. Tekan enter untuk keluar.
 
 IDENTITAS PEMBUAT
 Nama: Benjamin Sihombing

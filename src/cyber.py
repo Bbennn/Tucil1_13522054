@@ -124,10 +124,10 @@ else:
         print(bonus[i])
     print("")
 
-### Fungsi-fungsi
 resultPoints = []
 resultTokens = []
 resultBonus = 0
+### Fungsi-fungsi
 
 def convertPoint(arr):
     # merubah buffer translasi menjadi point buffer
@@ -245,7 +245,7 @@ if(keluar == 'y'):
             fileOut.write("\n")
             fileOut.write(str(bonus[i]))
             fileOut.write("\n")
-        fileOut.write("\n")
+    fileOut.write("")
     fileOut.write("Result: ")
     fileOut.write("\n")
     fileOut.write(str(resultBonus))
@@ -268,8 +268,3 @@ input() #agar program tidak tertutup
 
 # Notes:
 # 1. Ada beberapa input dari user yang pasti benar
-
-# Untuk testing
-'''
-C:\Kuliah\Tingkat 2\Semester 4\Stima\Tucil1_13522054\test\1.txt
-'''
