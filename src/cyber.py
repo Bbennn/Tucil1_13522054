@@ -36,7 +36,6 @@ if(opsi == 1):
     f.close()
     test = test.split("\n")
     nBuffer = int(test[0])
-    print(nBuffer)
     test.remove(str(nBuffer))
 
     sizeMatrix = str(test[0])
@@ -44,8 +43,6 @@ if(opsi == 1):
     sizeMatrix = sizeMatrix.split(" ")
     xMatrix = int(sizeMatrix[0])
     yMatrix = int(sizeMatrix[1])
-    print(xMatrix)
-    print(yMatrix)
 
     mainMatrix = []
     for i in range(yMatrix):
@@ -53,10 +50,8 @@ if(opsi == 1):
         test.remove(temp)
         temp = temp.split(" ")
         mainMatrix.append(temp)
-    print(mainMatrix)
 
     nSeq = int(test[0])
-    print(nSeq)
     test.remove(str(nSeq))
 
     seqs = []
@@ -69,8 +64,14 @@ if(opsi == 1):
         temp = test[0]
         test.remove(temp)
         bonus.append(int(temp))
-    print(seqs)
-    print(bonus)
+    # print("debug")
+    # print(nBuffer)
+    # print(xMatrix)
+    # print(yMatrix)
+    # print(mainMatrix)
+    # print(nSeq)
+    # print(seqs)
+    # print(bonus)
 else:
     # Input dari CLI
     print("Masukkan command dengan format:")
@@ -91,17 +92,19 @@ else:
     sizeMatrix = sizeMatrix.split(" ")
     nSeq = int(input())
     lenSeq = int(input())
-    print("debug")
-    print(nToken)
-    print(tokens)
-    print(nBuffer)
-    print(sizeMatrix)
-    print(nSeq)
-    print(lenSeq)
+    # print("debug")
+    # print(nToken)
+    # print(tokens)
+    # print(nBuffer)
+    # print(sizeMatrix)
+    # print(nSeq)
+    # print(lenSeq)
 
 
 ### Fungsi-fungsi
-result = []
+resultPoints = []
+resultTokens = []
+resultBonus = 0
 
 def convertPoint(arr):
     # merubah buffer translasi menjadi point buffer
@@ -134,22 +137,46 @@ def convertBuffer(arr):
         tokenBuffer.append(mainMatrix[point[1]][point[0]])
     return tokenBuffer
 
+def findBonus(seqs, bonus, bufferPoints):
+    result = 0
+    for i in range(len(seqs)):
+        if(subBuffer(seqs[i], bufferPoints)):
+            result += bonus[i]
+    return result
+
 def subBuffer(sub, main):
     # check sebuah seq adalah sub-buffer (bagian dari buffer)
     sub = " ".join(sub)
     main = " ".join(main)
     return sub in main
 
-fileOut = open("hasil1.txt", "w")
 def makeBuffer(digit, lenBuffer, buffer, slot):
     # membuat buffer
     if digit == lenBuffer:
         points = convertPoint(buffer)
         if(isCorrectBuffer(points)):
             tokens = convertBuffer(points)
-            if(subBuffer(seqs[1],tokens) and subBuffer(seqs[2],tokens)):
-                fileOut.write(" ".join(map(str, points)) + "\n")
-                fileOut.write(" ".join(map(str, tokens)) + "\n")
+            tempBonus = findBonus(seqs, bonus, tokens)
+            # print(tempBonus)
+            global resultBonus
+            global resultPoints 
+            global resultTokens 
+            if(tempBonus > resultBonus):
+                resultPoints = points
+                resultTokens = tokens
+                resultBonus = tempBonus
+                # resultPoints.append(" ".join(map(str, points)) + "\n")
+                # resultTokens.append(" ".join(map(str, tokens)) + "\n")
+                # fileOut.write(" ".join(map(str, points)) + "\n")
+                # fileOut.write(" ".join(map(str, tokens)) + "\n")
+            # elif(tempBonus == resultBonus and (len(tokens) < len(resultTokens))):
+            #     # resultPoints.append(" ".join(map(str, points)) + "\n")
+            #     # resultTokens.append(" ".join(map(str, tokens)) + "\n")
+            #     resultPoints = points
+            #     resultTokens = tokens
+            #     resultBonus = tempBonus
+                # fileOut.write(" ".join(map(str, points)) + "\n")
+                # fileOut.write(" ".join(map(str, tokens)) + "\n")
     else:
         if (digit == 0):
             for i in range(slot[digit]):
@@ -162,30 +189,64 @@ def makeBuffer(digit, lenBuffer, buffer, slot):
 
 
 ### Memproses fungsi dan output
-buffer = [0] * nBuffer  # Initialize loop counters
-slot = []
-for i in range(nBuffer):
-    if(i % 2 == 0):
-        slot.append(xMatrix)
-    else:
-        slot.append(yMatrix)
-
 start = time.time() # Waktu awal
-makeBuffer(0, nBuffer, buffer, slot) 
-fileOut.close()
-end = time.time() # waktu akhir
-print("The time of execution of above program is: ",(end-start) * 10**3, "ms")
+for x in range(nBuffer):
+    buffer = [0] * (x+1)  # Initialize loop counters
+    slot = []
+    for i in range(x+1):
+        if(i % 2 == 0):
+            slot.append(xMatrix)
+        else:
+            slot.append(yMatrix)
 
+    makeBuffer(0, x+1, buffer, slot)
+end = time.time() # waktu akhir
+
+# Output CLI
+print("Result: ")
+print(resultBonus)
+print(" ".join(resultTokens))
+for i in range(len(resultPoints)):
+    temp = resultPoints[i].copy()
+    temp[0] += 1
+    temp[1] += 1
+    print(temp)
+print("Time: ",(end-start) * 10**3, "ms")
+
+# Output file
+print("Apakah ingin menyimpan solusi? (y/n)")
+keluar = str(input())
+while(keluar != 'y' and keluar != 'n'):
+    print("Masukkan y atau n!")
+    keluar = str(input())
+if(keluar == 'y'):
+    fileOut = open("hasil.txt", "w")
+    fileOut.write("Result: ")
+    fileOut.write("\n")
+    fileOut.write(str(resultBonus))
+    fileOut.write("\n")
+    fileOut.write(" ".join(resultTokens))
+    fileOut.write("\n")
+    for i in range(len(resultPoints)):
+        temp = resultPoints[i].copy()
+        temp[0] += 1
+        temp[1] += 1
+        fileOut.write(str(temp))
+        fileOut.write("\n")
+    duration = "Time: " + str((end-start) * 10**3) + " ms"
+    fileOut.write(duration)   
+    fileOut.close()
 
 ### Exit
 print("Press enter to exit")
 input() #agar program tidak tertutup
 
 # Notes:
-# 1. Belum handle optimasi untuk pembangkit acak
-# 2. Belum handle kasus nBuffer < nMaxBuffer (belum optimal)
-# 3. Koordinatnya belum benar (perlu ditambah (1, 1))
-# 4. Output ke file belum finish
+# 1. Belum handle optimasi untuk pembangkit acak SOLVED
+# 2. Belum handle kasus nBuffer < nMaxBuffer (belum optimal) SOLVED
+# 3. Koordinatnya belum benar (perlu ditambah (1, 1)) SOLVED
+# 4. Output ke file belum finish SOLVED
+# 5. Belum handle pembangkit acak
 
 
 # Untuk testcase
