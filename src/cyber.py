@@ -108,13 +108,6 @@ else:
             temp.append(random.choice(tokens))
         seqs.append(temp)
         bonus.append(random.randint(-100,100))
-    # print("debug")
-    # print(nToken)
-    # print(tokens)
-    # print(nBuffer)
-    # print(sizeMatrix)
-    # print(nSeq)
-    # print(lenSeq)
     print("Matriks: ")
     for i in range(yMatrix):
         print(" ".join(mainMatrix[i]))
@@ -123,6 +116,13 @@ else:
         print(" ".join(seqs[i]))
         print(bonus[i])
     print("")
+    # print("debug")
+    # print(nToken)
+    # print(tokens)
+    # print(nBuffer)
+    # print(sizeMatrix)
+    # print(nSeq)
+    # print(lenSeq)
 
 resultPoints = []
 resultTokens = []
@@ -267,4 +267,4 @@ print("Press enter to exit")
 input() #agar program tidak tertutup
 
 # Notes:
-# 1. Ada beberapa input dari user yang pasti benar
+# 1. Ada beberapa input dari user yang dianggap benar

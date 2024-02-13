@@ -3,7 +3,7 @@
 PROGRAM CYBERPUNK 2077 BREACH PROTOCOL SOLVER
 
 DESKRIPSI
-Program ini terinspirasi dari game https://cyberpunk-hacker.com/
+Program ini terinspirasi dari solver game https://cyberpunk-hacker.com
 Ada 4 komponen penting pada game ini:
 1. Token – terdiri dari dua karakter alfanumerik seperti E9, BD, dan 55.
 2. Matriks – terdiri atas token-token yang akan dipilih untuk menyusun urutan kode.
@@ -20,7 +20,6 @@ Buffer adalah kumpulan token yang diambil dari matriks dengan mekanisme berikut:
 
 REQUIREMENT
 - python
-- pip
 - pyinstaller
 
 CARA KOMPILASI (jika perlu, sudah ada file .exe di bin)

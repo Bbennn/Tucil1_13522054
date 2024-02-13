@@ -1,0 +1,32 @@
+Matriks: 
+o7 ef He I5 I5 CD I5
+I5 He CD o7 I5 ef xY
+CD CD xY xY o7 aB He
+xY He CD He He CD xY
+I5 aB He I5 He 76 CD
+aB 76 I5 aB I5 xY CD
+ef o7 76 aB aB aB ef
+aB 76 ef aB 76 xY xY
+CD aB aB 76 o7 ef aB
+Sequences beserta bonusnya:
+aB 76
+-7
+I5 ef 76 CD
+-72
+ef 76 I5 ef ef o7
+23
+76 xY He CD I5 I5
+74
+xY 76 He CD
+-34
+Result: 
+74
+ef 76 xY He CD I5 I5
+[2, 1]
+[2, 8]
+[7, 8]
+[7, 3]
+[1, 3]
+[1, 5]
+[4, 5]
+Time: 194119.92740631104 ms
